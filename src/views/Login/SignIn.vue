@@ -1,5 +1,5 @@
 <template>
-  <div class="SignIn">1111</div>
+  <div class="SignIn"></div>
 </template>
 <script>
 export default {
