@@ -1,47 +1,33 @@
 <template>
   <div class="home">
-    <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
-      <el-tab-pane label="登录" name="first"><SignIn /></el-tab-pane>
-      <el-tab-pane label="注册" name="second"><register /></el-tab-pane>
-    </el-tabs>
+    <indexTop />
+    <indexMiddle />
+    <indexBottom />
   </div>
 </template>
 <script>
-import SignIn from "./SignIn";
-import register from "./register";
+import indexTop from './indexTop'
+import indexMiddle from './indexMiddle'
+import indexBottom from './indexBottom'
+
 export default {
   components: {
-    SignIn,
-    register,
+    indexTop,
+    indexMiddle,
+    indexBottom,
   },
   data() {
-    return {
-      activeName: "first",
-    };
+    return {}
   },
-  methods: {
-    handleClick(tab, event) {
-      console.log(tab, event);
-    },
-  },
-};
+  methods: {},
+}
 </script>
 <style lang="scss" scoped>
 .home {
-  margin-top: 10vh;
-  /deep/ .el-tabs__header {
-    border-bottom: none;
-    .el-tabs__nav {
-      margin-left: 50%;
-      transform: translate(-50%, 0) !important;
-      border-bottom: none;
-      .el-tabs__item {
-        font-size: 20px;
-      }
-    }
-  }
-  /deep/ .el-tabs__content {
-    text-align: center;
-  }
+  box-sizing: border-box;
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(5, 14, 59);
+  padding: 10px;
 }
 </style>
