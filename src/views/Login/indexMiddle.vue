@@ -52,7 +52,9 @@
       <!-- 降雨气象信息 -->
       <div class="meteorological"></div>
       <!-- 近24小时的雨量 -->
-      <div class="rainfall"></div>
+      <div class="rainfall">
+        <div id="rainFallMain" style="width: 100%; height: 100%"></div>
+      </div>
       <!-- 雷达图 -->
       <div class="radarMap"></div>
     </div>
@@ -99,6 +101,7 @@ export default {
   mounted() {
     this.roseChartMain() // 玫瑰图表
     this.annularChartMain() // 环形图表
+    this.rainFallMain() // 24小时降雨图表
   },
   methods: {
     // 玫瑰图表
@@ -158,6 +161,7 @@ export default {
         ],
       })
     },
+    // 环形图表
     annularChartMain() {
       // 基于准备好的dom，初始化echarts实例
       let myChart = this.$echarts.init(
@@ -218,6 +222,106 @@ export default {
               { value: 484, name: 'annular4' },
               { value: 300, name: 'annular5' },
             ],
+          },
+        ],
+      })
+    },
+    // 24小时降雨图表
+    rainFallMain() {
+      let myChart = this.$echarts.init(document.getElementById('rainFallMain'))
+      myChart.setOption({
+        title: {
+          text: '近24小时雨量',
+          left: 'center',
+          textStyle: {
+            color: '#fff',
+            fontSize: 14,
+          },
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow',
+          },
+        },
+        grid: {
+          x: 38,
+          y: 25,
+          x2: 30,
+          y2: 20,
+        },
+        xAxis: [
+          {
+            type: 'category',
+            data: ['双合', '木系噶', '东升', '查干沐沦', '钓鱼台'],
+            axisLabel: {
+              //坐标轴刻度标签的相关设置。
+              interval: 0,
+              rotate: '0',
+            },
+            axisTick: {
+              alignWithLabel: true,
+            },
+            splitLine: {
+              show: true,
+              lineStyle: {
+                color: 'skyblue',
+              },
+            },
+          },
+        ],
+        yAxis: [
+          {
+            type: 'value',
+            name: '本月降雨',
+            nameTextStyle: {
+              color: '#fff',
+              fontSize: 10,
+            },
+            min: 0,
+            max: 1000,
+            interval: 200,
+            axisLabel: {
+              textStyle: {
+                color: '#fff',
+              },
+            },
+          },
+          {
+            type: 'value',
+            name: '当前降雨',
+            nameTextStyle: {
+              color: '#fff',
+              fontSize: 10,
+            },
+            min: 0,
+            max: 25,
+            interval: 5,
+            axisLabel: {
+              formatter: '{value}',
+              textStyle: {
+                color: '#fff',
+              },
+            },
+            splitLine: {
+              show: true,
+              lineStyle: {
+                color: 'skyblue',
+              },
+            },
+          },
+        ],
+        series: [
+          {
+            name: '本月降雨',
+            type: 'bar',
+            barWidth: '60%',
+            data: [100, 52, 200, 334, 390, 330, 220],
+          },
+          {
+            name: '当前降雨',
+            data: [10, 0, 26, 35, 0, 33, 15],
+            type: 'line',
           },
         ],
       })

@@ -48,7 +48,7 @@
   </div>
 </template>
 <script>
-import noticebar from '../../components/NoticeBar'
+import noticebar from '../../components/NoticeBar' // 引入滚动播放提示条组件 
 export default {
   components: {
     noticebar,

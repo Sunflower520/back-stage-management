@@ -1,6 +1,5 @@
 <template>
   <transition name="fade">
-    <!--主要内容-->
     <div class="noticebar" :style="{ backgroundColor: data.backround }">
       <div style="margin-left: 5px"></div>
       <img
