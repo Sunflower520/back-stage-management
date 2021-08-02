@@ -8,7 +8,8 @@
           <p>代办事项</p>
         </div>
         <div class="expect">
-          <p>
+          <div id="expectMain" style="width: 100%; height: 100%"></div>
+          <!-- <p>
             <span class="completed">
               <b>20</b>
             </span>
@@ -21,19 +22,19 @@
           <p>
             <span class="overdue"><b>20</b></span>
             <i style="color: orange">逾期</i>
-          </p>
+          </p> -->
         </div>
       </div>
       <!-- 图表 -->
       <div class="chart">
         <!-- 玫瑰图表 -->
-        <div class="roseChart" style="width: 50%" height="100%">
+        <div class="roseChart" style="width: 100%" height="100%">
           <div id="roseChartMain" style="width: 100%; height: 100%"></div>
         </div>
         <!-- 环形图表 -->
-        <div class="annularChart" style="width: 50%" height="100%">
+        <!-- <div class="annularChart" style="width: 50%" height="100%">
           <div id="annularChartMain" style="width: 100%; height: 100%"></div>
-        </div>
+        </div> -->
       </div>
       <!-- 灌区概况 -->
       <div class="irrigatedSurvey">
@@ -100,62 +101,430 @@ export default {
   },
   mounted() {
     this.roseChartMain() // 玫瑰图表
-    this.annularChartMain() // 环形图表
+    // this.annularChartMain() // 环形图表
     this.rainFallMain() // 24小时降雨图表
+    this.expectMain() //
   },
   methods: {
+    expectMain() {
+      let myChart = this.$echarts.init(document.getElementById('expectMain'))
+      myChart.setOption({
+        series: [
+          {
+            name: '已完成',
+            type: 'pie',
+            radius: ['42%', '48%'],
+            center: ['15%', '50%'],
+            startAngle: 225,
+            color: [
+              new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {
+                  offset: 0,
+                  color: '#f1d72b',
+                },
+                {
+                  offset: 1,
+                  color: '#cf7f14',
+                },
+              ]),
+              'transparent',
+            ],
+            labelLine: {
+              normal: {
+                show: false,
+              },
+            },
+            label: {
+              normal: {
+                position: 'center',
+              },
+            },
+            data: [
+              {
+                value: 75,
+                name: '已完成',
+                label: {
+                  normal: {
+                    formatter: '已完成',
+                    textStyle: {
+                      color: '#fff',
+                      fontSize: 14,
+                    },
+                  },
+                },
+              },
+              {
+                value: 25,
+                name: '%',
+                label: {
+                  normal: {
+                    formatter: '\n\n35',
+                    textStyle: {
+                      color: '#FFDB5C',
+                      fontSize: 24,
+                    },
+                  },
+                },
+              },
+              {
+                value: 0,
+                name: '%',
+                label: {
+                  normal: {
+                    formatter: '',
+                    textStyle: {
+                      color: '#fff',
+                      fontSize: 14,
+                    },
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: '未完成',
+            type: 'pie',
+            radius: ['42%', '48%'],
+            center: ['50%', '50%'],
+            startAngle: 225,
+            color: [
+              new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {
+                  offset: 0,
+                  color: '#16e5cc',
+                },
+                {
+                  offset: 1,
+                  color: '#139dd6',
+                },
+              ]),
+              'transparent',
+            ],
+            labelLine: {
+              normal: {
+                show: false,
+              },
+            },
+            label: {
+              normal: {
+                position: 'center',
+              },
+            },
+            data: [
+              {
+                value: 75,
+                name: '未完成',
+                label: {
+                  normal: {
+                    formatter: '未完成',
+                    textStyle: {
+                      color: '#fff',
+                      fontSize: 14,
+                    },
+                  },
+                },
+              },
+              {
+                value: 25,
+                name: '%',
+                label: {
+                  normal: {
+                    formatter: '\n\n22',
+                    textStyle: {
+                      color: '#007ac6',
+                      fontSize: 24,
+                    },
+                  },
+                },
+              },
+              {
+                value: 0,
+                name: '%',
+                label: {
+                  normal: {
+                    formatter: '',
+                    textStyle: {
+                      color: '#fff',
+                      fontSize: 14,
+                    },
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: '超期',
+            type: 'pie',
+            radius: ['42%', '48%'],
+            center: ['85%', '50%'],
+            startAngle: 225,
+            labelLine: {
+              normal: {
+                show: false,
+              },
+            },
+            label: {
+              normal: {
+                position: 'center',
+              },
+            },
+            data: [
+              {
+                value: 75,
+                itemStyle: {
+                  normal: {
+                    color: new this.$echarts.graphic.LinearGradient(
+                      0,
+                      0,
+                      0,
+                      1,
+                      [
+                        {
+                          offset: 0,
+                          color: '#5d0f1c',
+                        },
+                        {
+                          offset: 1,
+                          color: '#ef0027',
+                        },
+                      ]
+                    ),
+                  },
+                },
+                name: '超期',
+                label: {
+                  normal: {
+                    formatter: '超期',
+                    textStyle: {
+                      color: '#fff',
+                      fontSize: 14,
+                    },
+                  },
+                },
+              },
+              {
+                value: 25,
+                name: '%',
+                label: {
+                  normal: {
+                    formatter: '\n\n9',
+                    textStyle: {
+                      color: '#ef0027',
+                      fontSize: 24,
+                    },
+                  },
+                },
+              },
+              {
+                value: 0,
+                name: '%',
+                label: {
+                  normal: {
+                    formatter: '',
+                    textStyle: {
+                      color: '#fff',
+                      fontSize: 16,
+                    },
+                  },
+                },
+              },
+            ],
+          },
+        ],
+      })
+    },
     // 玫瑰图表
     roseChartMain() {
       // 基于准备好的dom，初始化echarts实例
       let myChart = this.$echarts.init(document.getElementById('roseChartMain'))
       // 绘制图表
       myChart.setOption({
-        legend: {
-          // orient: 'vertical',
-          bottom: 'bottom',
-          itemGap: 5,
-          textStyle: {
-            //图例文字的样式
-            color: '#fff',
-            fontSize: 10,
-          },
-        },
+        // backgroundColor: '#000',
         tooltip: {
           trigger: 'item',
+          formatter: '{a} <br/>{b} : {c}千万元',
         },
+        legend: {
+          x: 'center',
+          y: '15%',
+          data: ['义乌市1', '义乌市2', '义乌市3'],
+          icon: 'circle',
+          textStyle: {
+            color: '#fff',
+          },
+        },
+        calculable: true,
         series: [
           {
-            name: '面积模式',
+            name: '可疑群众线索',
             type: 'pie',
-            radius: '50%',
-            center: ['50%', '30%'],
+            //起始角度，支持范围[0, 360]
+            startAngle: 0,
+            //饼图的半径，数组的第一项是内半径，第二项是外半径
+            radius: ['100%', '10%'],
+            //支持设置成百分比，设置成百分比时第一项是相对于容器宽度，第二项是相对于容器高度
+            center: ['50%', '35%'],
+            //是否展示成南丁格尔图，通过半径区分数据大小。可选择两种模式：
+            // 'radius' 面积展现数据的百分比，半径展现数据的大小。
+            //  'area' 所有扇区面积相同，仅通过半径展现数据大小
             roseType: 'area',
+            //是否启用防止标签重叠策略，默认开启，圆环图这个例子中需要强制所有标签放在中心位置，可以将该值设为 false。
+            avoidLabelOverlap: false,
             label: {
-              fontSize: 12,
-              color: '#fff',
+              normal: {
+                show: true,
+                formatter: '{d}%',
+              },
+              emphasis: {
+                show: true,
+              },
             },
             itemStyle: {
+              shadowColor: '#19181d',
+              shadowBlur: 30,
+            },
+            labelLine: {
               normal: {
-                label: {
-                  show: false,
-                  textStyle: {
-                    //图例文字的样式
-                    color: '#fff',
-                    fontSize: 10,
-                  },
-                },
-                labelLine: {
-                  show: false,
-                  // length: 1,
-                },
+                show: true,
+              },
+              emphasis: {
+                show: true,
               },
             },
             data: [
-              { value: 40, name: 'rose1' },
-              { value: 38, name: 'rose2' },
-              { value: 32, name: 'rose3' },
-              { value: 30, name: 'rose4' },
-              { value: 28, name: 'rose5' },
+              {
+                value: 600,
+                name: '已完成',
+                label: {
+                  color: '#FDD56A',
+                },
+                itemStyle: {
+                  normal: {
+                    color: '#FDD56A',
+                    color: {
+                      type: 'linear',
+                      x: 0,
+                      y: 0,
+                      x2: 0,
+                      y2: 1,
+                      colorStops: [
+                        {
+                          offset: 1,
+                          color: '#f1d72b', // 0% 处的颜色
+                        },
+                        {
+                          offset: 1,
+                          color: '#cf7f14', // 100% 处的颜色
+                        },
+                      ],
+                      global: false, // 缺省为 false
+                    },
+                  },
+                },
+              },
+              {
+                value: 1100,
+                name: '未完成',
+                label: {
+                  color: '#16e5cc',
+                },
+                itemStyle: {
+                  normal: {
+                    color: {
+                      type: 'linear',
+                      x: 0,
+                      y: 0,
+                      x2: 0,
+                      y2: 1,
+                      colorStops: [
+                        {
+                          offset: 0,
+                          color: '#16e5cc', // 0% 处的颜色
+                        },
+                        {
+                          offset: 1,
+                          color: '#139dd6', // 100% 处的颜色
+                        },
+                      ],
+                      global: false, // 缺省为 false
+                    },
+                  },
+                },
+              },
+              {
+                value: 1200,
+                name: '超期',
+                label: {
+                  color: '#ef0027',
+                },
+                itemStyle: {
+                  normal: {
+                    color: {
+                      type: 'linear',
+                      x: 0,
+                      y: 0,
+                      x2: 0,
+                      y2: 1,
+                      colorStops: [
+                        {
+                          offset: 0,
+                          color: '#5d0f1c', // 0% 处的颜色
+                        },
+                        {
+                          offset: 1,
+                          color: '#ef0027', // 100% 处的颜色
+                        },
+                      ],
+                      global: false, // 缺省为 false
+                    },
+                  },
+                },
+              },
+              {
+                value: 0,
+                name: '',
+                itemStyle: {
+                  normal: {
+                    color: 'transparent',
+                  },
+                },
+                label: {
+                  show: false,
+                },
+                labelLine: {
+                  show: false,
+                },
+              },
+              {
+                value: 0,
+                name: '',
+                itemStyle: {
+                  normal: {
+                    color: 'transparent',
+                  },
+                },
+                label: {
+                  show: false,
+                },
+                labelLine: {
+                  show: false,
+                },
+              },
+              {
+                value: 0,
+                name: '',
+                itemStyle: {
+                  normal: {
+                    color: 'transparent',
+                  },
+                },
+                label: {
+                  show: false,
+                },
+                labelLine: {
+                  show: false,
+                },
+              },
             ],
           },
         ],
@@ -258,6 +627,9 @@ export default {
               //坐标轴刻度标签的相关设置。
               interval: 0,
               rotate: '0',
+              textStyle: {
+                color: '#fff',
+              },
             },
             axisTick: {
               alignWithLabel: true,
@@ -315,7 +687,7 @@ export default {
           {
             name: '本月降雨',
             type: 'bar',
-            barWidth: '60%',
+            barWidth: '80%',
             data: [100, 52, 200, 334, 390, 330, 220],
           },
           {
@@ -351,9 +723,9 @@ export default {
       border: 2px solid skyblue;
       border-radius: 16px;
       .title {
-        width: 30%;
-        height: 100%;
-        float: left;
+        width: 100%;
+        // height: 100%;
+        // float: left;
         p {
           color: #fff;
           font-size: 20px;
@@ -362,7 +734,7 @@ export default {
       }
       .expect {
         display: flex;
-        width: 70%;
+        width: 100%;
         height: 100%;
         float: right;
         p {

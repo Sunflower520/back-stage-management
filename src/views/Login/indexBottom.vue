@@ -70,7 +70,6 @@ export default {
             //图例文字的样式
             color: '#fff',
           },
-          // subtext: 'Feature Sample: Gradient Color, Shadow, Click Zoom'
         },
         grid: {
           x: 50,
@@ -135,7 +134,6 @@ export default {
         yAxis: [
           {
             type: 'value',
-            //   name: '水量',
             min: 0,
             max: 250,
             interval: 50,
@@ -148,7 +146,6 @@ export default {
           },
           {
             type: 'value',
-            //   name: '温度',
             min: 0,
             max: 25,
             interval: 5,

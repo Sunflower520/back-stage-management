@@ -2,15 +2,15 @@
   <transition name="fade">
     <div class="noticebar" :style="{ backgroundColor: data.backround }">
       <div style="margin-left: 5px"></div>
-      <img
+      <i
         v-if="data.icon"
         :style="{
           height: data.iconSize ? data.iconSize : '16px',
           width: data.iconSize ? data.iconSize : '16px',
+          color: 'red',
         }"
-        :src="data.icon"
-        alt=""
-      />
+        :class="data.icon"
+      ></i>
       <div style="margin-right: 5px"></div>
       <div ref="back" class="back">
         <span
@@ -114,9 +114,10 @@ export default {
   width: 100%;
   background-color: #fff7cc;
   .icon {
-    img {
+    i {
       height: 100%;
       width: 100%;
+      
     }
   }
   .back {
