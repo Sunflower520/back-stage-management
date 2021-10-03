@@ -46,7 +46,7 @@ export default {
       wordLength: '', // 文本长度
       state: 1,
       firstAnimationTime: '', // 状态一动画效果
-      secondAnimationTime: '', // 状态二动画效果
+      secondAnimationTime: '', // 状态 二动画效果
       data: this.options,
     }
   },
